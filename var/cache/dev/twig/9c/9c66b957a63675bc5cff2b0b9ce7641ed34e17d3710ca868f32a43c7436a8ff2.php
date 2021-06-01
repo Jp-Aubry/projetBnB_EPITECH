@@ -99,6 +99,6 @@ class __TwigTemplate_c4e0268f5deb8c40fe44458047caca136e03d8a4441f8387796518aeada
 .container.body_default {
     border-top: 8px solid #aaaaaa;
 }
-", "@email/zurb_2/notification/local.css", "/Users/ericbernard/Desktop/ywc/ywc/vendor/symfony/twig-bridge/Resources/views/Email/zurb_2/notification/local.css");
+", "@email/zurb_2/notification/local.css", "/home/aubry/Bureau/projetbnb_EPITECH NE/vendor/symfony/twig-bridge/Resources/views/Email/zurb_2/notification/local.css");
     }
 }

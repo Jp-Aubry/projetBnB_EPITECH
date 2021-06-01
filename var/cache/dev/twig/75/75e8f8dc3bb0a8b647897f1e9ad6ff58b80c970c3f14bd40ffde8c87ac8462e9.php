@@ -417,6 +417,6 @@ class __TwigTemplate_79d5ab838b7a3ec06dca15603025d63e9f3c6aa1b9d27b91e41a1d2494b
     });
 })();
 </script>
-", "@WebProfiler/Profiler/settings.html.twig", "/Users/ericbernard/Desktop/ywc/ywc/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/settings.html.twig");
+", "@WebProfiler/Profiler/settings.html.twig", "/home/aubry/Bureau/projetbnb_EPITECH NE/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/settings.html.twig");
     }
 }

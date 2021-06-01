@@ -1490,7 +1490,8 @@
         "keywords": [
             "reflection",
             "static"
-        ]
+        ],
+        "abandoned": "roave/better-reflection"
     },
     {
         "name": "egulias/email-validator",
@@ -1602,7 +1603,8 @@
             "data",
             "faker",
             "fixtures"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "jdorn/sql-formatter",
@@ -2402,6 +2404,30 @@
             "annotations",
             "controllers"
         ]
+    },
+    {
+        "name": "symfony/apache-pack",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/apache-pack.git",
+            "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+            "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+            "shasum": ""
+        },
+        "time": "2017-12-12T01:46:35+00:00",
+        "type": "symfony-pack",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "A pack for Apache support in Symfony"
     },
     {
         "name": "symfony/asset",
@@ -4563,7 +4589,8 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
-        ]
+        ],
+        "abandoned": "use `EnglishInflector` from the String component instead"
     },
     {
         "name": "symfony/intl",
@@ -7958,12 +7985,12 @@
         "version_normalized": "1.8.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/webmozart/assert.git",
+            "url": "https://github.com/webmozarts/assert.git",
             "reference": "ab2cb0b3b559010b75981b1bdce728da3ee90ad6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/webmozart/assert/zipball/ab2cb0b3b559010b75981b1bdce728da3ee90ad6",
+            "url": "https://api.github.com/repos/webmozarts/assert/zipball/ab2cb0b3b559010b75981b1bdce728da3ee90ad6",
             "reference": "ab2cb0b3b559010b75981b1bdce728da3ee90ad6",
             "shasum": ""
         },

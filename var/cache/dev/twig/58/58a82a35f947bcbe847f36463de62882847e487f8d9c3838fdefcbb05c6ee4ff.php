@@ -71,6 +71,6 @@ class __TwigTemplate_47212aa1420e0885e1dde10608c40107bd30651f3023f2bf36775d9ac18
     public function getSourceContext()
     {
         return new Source("{% extends \"@email/zurb_2/notification/body.txt.twig\" %}
-", "@email/default/notification/body.txt.twig", "/Users/ericbernard/Desktop/ywc/ywc/vendor/symfony/twig-bridge/Resources/views/Email/default/notification/body.txt.twig");
+", "@email/default/notification/body.txt.twig", "/home/aubry/Bureau/projetbnb_EPITECH NE/vendor/symfony/twig-bridge/Resources/views/Email/default/notification/body.txt.twig");
     }
 }
