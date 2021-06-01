@@ -745,7 +745,7 @@ abstract class HttpClientTestCase extends TestCase
         usleep(300000); // wait for the previous test to release the server
         $client = $this->getHttpClient(__FUNCTION__);
         $response = $client->request('GET', 'http://localhost:8057/timeout-body', [
-            'timeout' => 0.3,
+            'timeout' => 0.25,
         ]);
 
         try {
@@ -811,6 +811,30 @@ abstract class HttpClientTestCase extends TestCase
         }
     }
 
+    public function testTimeoutWithActiveConcurrentStream()
+    {
+        $p1 = TestHttpServer::start(8067);
+        $p2 = TestHttpServer::start(8077);
+
+        $client = $this->getHttpClient(__FUNCTION__);
+        $streamingResponse = $client->request('GET', 'http://localhost:8067/max-duration');
+        $blockingResponse = $client->request('GET', 'http://localhost:8077/timeout-body', [
+            'timeout' => 0.25,
+        ]);
+
+        $this->assertSame(200, $streamingResponse->getStatusCode());
+        $this->assertSame(200, $blockingResponse->getStatusCode());
+
+        $this->expectException(TransportExceptionInterface::class);
+
+        try {
+            $blockingResponse->getContent();
+        } finally {
+            $p1->stop();
+            $p2->stop();
+        }
+    }
+
     public function testDestruct()
     {
         $client = $this->getHttpClient(__FUNCTION__);
@@ -836,6 +860,18 @@ abstract class HttpClientTestCase extends TestCase
         }
     }
 
+    public function testGetEncodedContentAfterDestruct()
+    {
+        $client = $this->getHttpClient(__FUNCTION__);
+
+        try {
+            $client->request('GET', 'http://localhost:8057/404-gzipped');
+            $this->fail(ClientExceptionInterface::class.' expected');
+        } catch (ClientExceptionInterface $e) {
+            $this->assertSame('some text', $e->getResponse()->getContent(false));
+        }
+    }
+
     public function testProxy()
     {
         $client = $this->getHttpClient(__FUNCTION__);
@@ -845,7 +881,7 @@ abstract class HttpClientTestCase extends TestCase
 
         $body = $response->toArray();
         $this->assertSame('localhost:8057', $body['HTTP_HOST']);
-        $this->assertRegexp('#^http://(localhost|127\.0\.0\.1):8057/$#', $body['REQUEST_URI']);
+        $this->assertMatchesRegularExpression('#^http://(localhost|127\.0\.0\.1):8057/$#', $body['REQUEST_URI']);
 
         $response = $client->request('GET', 'http://localhost:8057/', [
             'proxy' => 'http://foo:b%3Dar@localhost:8057',
@@ -1001,5 +1037,21 @@ abstract class HttpClientTestCase extends TestCase
         $duration = microtime(true) - $start;
 
         $this->assertLessThan(10, $duration);
+    }
+
+    public function testWithOptions()
+    {
+        $client = $this->getHttpClient(__FUNCTION__);
+        if (!method_exists($client, 'withOptions')) {
+            $this->markTestSkipped(sprintf('Not implementing "%s::withOptions()" is deprecated.', get_debug_type($client)));
+        }
+
+        $client2 = $client->withOptions(['base_uri' => 'http://localhost:8057/']);
+
+        $this->assertNotSame($client, $client2);
+        $this->assertSame(\get_class($client), \get_class($client2));
+
+        $response = $client2->request('GET', '/');
+        $this->assertSame(200, $response->getStatusCode());
     }
 }
